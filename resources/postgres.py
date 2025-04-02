@@ -7,7 +7,7 @@ class PostgreSQL:
 
     def __init__(self):
         self.conn = None
-        self.DB_HOST = os.getenv("DB_HOST", "localhost")
+        self.DB_HOST = os.getenv("DB_HOST", "host.docker.internal")
         self.DB_PORT = os.getenv("DB_PORT", "5432")
         self.DB_USER = os.getenv("DB_USER", "postgres")
         self.DB_NAME = os.getenv("DB_NAME", "meetperry")
