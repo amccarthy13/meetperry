@@ -40,7 +40,7 @@ class ReportManager(DataManager):
 
     async def getNewIncompleteTasks(self, start_time: datetime, end_time: datetime):
         sql = ("SELECT external_id, content, created_date, user_id FROM meetperry.task WHERE created_date <= %s "
-               "AND created_date > %s AND completed_date IS NULL;")
+               "AND created_date > %s AND completed_date IS NULL AND deleted_date IS NULL;")
         data = [end_time.isoformat(), start_time.isoformat()]
         rows = self.postgres.execute_many(sql, data)
         tasks = defaultdict(list)
@@ -66,7 +66,7 @@ class ReportManager(DataManager):
 
     async def collectOldIncompleteTasks(self, start_time: datetime):
         sql = ("SELECT external_id, content, created_date, user_id FROM meetperry.task WHERE created_date < %s AND "
-               "completed_date IS NULL;")
+               "completed_date IS NULL AND deleted_date IS NULL;")
         data = [start_time]
         rows = self.postgres.execute_many(sql, data)
         tasks = defaultdict(list)
