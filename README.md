@@ -66,6 +66,8 @@ CREATE TABLE meetperry.task (
 * The POST webhook endpoint would be best deployed on a cloud hosted kubernetes cluster (or similar)
 * I believe most obvious edge cases are handled here.  I created custom exceptions which are caught in the route logic.
   * These include duplicate `create` events for tasks, sending an `update` or `deletion` event before a task is created, and sending an invalid event type
+  * Invalid task statuses are also handled.  If a task is marked as deleted but a completion is still attempted, it will fail.
+  * The service is also idempotent.  A completion can be performed on an already completed task and the endpoint will return success but nothing will change.  The same applies for deletions
   * Some issues would probably pop up regarding the request structure.  FastAPI does some heavy lifting and enforces the request structure with 422's returned if any parameter types are invalid.  Regardless, I'm sure some 500's could be produced with malformed request bodies.
 * In a more built out implementation, we would want GET endpoint(s) to retrieve task information.
 * We would also probably want to include more logging and to store each webhook that is sent for auditing purposes.
@@ -85,8 +87,11 @@ CREATE TABLE meetperry.task (
     * Send a second `created` event with the same id and ensure a 409 is received
   * Send a `updated` event (with isCompleted set to true) and ensure the task is marked as completed in the db (completed_date set and non-null)
     * Send an `updated` event with a task id that doesn't exist and confirm we receive a 404
+    * Send an `updated` event with a deleted task and ensure we receive a 400
+    * Send an `updated` event with an already completed task and ensure we receive a 200 and the completed date remains unchanged
   * Send a `deleted` event and ensure the task is marked as deleted (deleted_date set and non-null)
     * Send a `deleted` event with a task id that doesn't exist and confirm we receive a 404
+    * Send an `deleted` event with an already deleted task and ensure we receive a 200 and the completed date remains unchanged
   * Send a nonsense event type and ensure we receive a 400
   * Check to make sure reports are generated for each user on the correct cadence.
     * Make sure each category has the correct number of tasks
