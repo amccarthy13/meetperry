@@ -5,7 +5,7 @@
 * You will need a local instance of postgres running.
   * Run the sql queries contained in the `changeset.sql` file to generated the table needed for the service
 * I've provided a Docker file to allow you to easily run the service.Run `docker build -t meet-perry .`
-to build the image, then run `docker run -p 8000:8000 --env REPORT_INTERVAL_SECONDS=60 meet-perry` to start the service.
+to build the image, then run `docker run -p 8000:8000 --env REPORT_INTERVAL_SECONDS=60 -v $(pwd):/app meet-perry` to start the service.
   * `REPORT_INTERVAL_SECONDS` is a suggestion.  It should be set to however often you want the report to be generated.
 * If Docker fails, you can run `python app.py` to attempt to start the service locally:
   * You will need the libraries contained in `requirements.txt` installed for the app to work.  Also make sure the `DB_HOST` env var is set to `localhost` 
@@ -35,6 +35,7 @@ to build the image, then run `docker run -p 8000:8000 --env REPORT_INTERVAL_SECO
         ```     
 * The report generation is run in a background thread and puts the results into a json file.  Each file is structured like so:
   * `task_report_{user_id}_{start_time}_{end_time}.json`
+  * I provided 2 sample output files as well for you reference.
 * There is a single db table used for this service, structured like so:
 ```
 CREATE TABLE meetperry.task (

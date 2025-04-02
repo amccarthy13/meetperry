@@ -31,7 +31,7 @@ class ReportManager(DataManager):
             file_name = f"task_report_{user_id}_{start_time.isoformat()}_{end_time.isoformat()}.json"
             logging.debug(f"Generating report with name {file_name} with {len(new_incomplete_tasks)} new incomplete tasks, "
                           f"{len(completed_tasks)} completed tasks, and {len(old_incomplete_tasks)} old incomplete tasks.")
-            file_path = Path(file_name)
+            file_path = Path(f"{file_name}")
 
             with open(file_path, "w") as f:
                 json.dump(report.model_dump(), f, indent=2, default=str)

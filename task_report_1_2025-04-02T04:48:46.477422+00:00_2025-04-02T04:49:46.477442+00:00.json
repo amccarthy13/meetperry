@@ -1,0 +1,46 @@
+{
+  "userId": "1",
+  "period": {
+    "start": "2025-04-02 04:48:46.477422+00:00",
+    "end": "2025-04-02 04:49:46.477442+00:00"
+  },
+  "newIncompleteTasks": [],
+  "completedTasks": [],
+  "oldIncompleteTasks": [
+    {
+      "id": "1",
+      "content": "Play games all day",
+      "createdOrCompletedAt": "2025-04-01 14:23:45-04:00"
+    },
+    {
+      "id": "2",
+      "content": "Play games all day",
+      "createdOrCompletedAt": "2025-04-01 14:23:45-04:00"
+    },
+    {
+      "id": "3",
+      "content": "Play games all day",
+      "createdOrCompletedAt": "2025-04-01 14:23:45-04:00"
+    },
+    {
+      "id": "4",
+      "content": "Play games all day",
+      "createdOrCompletedAt": "2025-04-01 14:23:45-04:00"
+    },
+    {
+      "id": "5",
+      "content": "Play games all day",
+      "createdOrCompletedAt": "2025-04-01 14:23:45-04:00"
+    },
+    {
+      "id": "6",
+      "content": "Play games all day",
+      "createdOrCompletedAt": "2025-04-01 14:23:45-04:00"
+    },
+    {
+      "id": "7",
+      "content": "Play games all day",
+      "createdOrCompletedAt": "2025-04-01 14:23:45-04:00"
+    }
+  ]
+}
